@@ -19,4 +19,4 @@ if __name__ == "__main__":
     ]
     
     for model_name in model_list:
-        os.system(f'python train.py --log_dir=logs --mode_name={model_name}')
+        os.system(f'python train.py --log_dir=base_logs --mode_name={model_name}')
