@@ -17,20 +17,20 @@ from torch.utils.tensorboard import SummaryWriter
 
 from models import *
 
-modle_dic = {'VGG16':VGG16, 
-             'ResNet18':ResNet18,
-             'ResNet50':ResNet50,
-             'ResNet101':ResNet101,
-             'RegNetX_200MF':RegNetX_200MF,
-             'RegNetY_400MF':RegNetY_400MF,
-             'MobileNetV2':MobileNetV2,
-             'ResNeXt29(32x4d)':ResNeXt29_32x4d,
-             'ResNeXt29(2x64d)':ResNeXt29_2x64d,
-             'SimpleDLA':SimpleDLA,
-             'DenseNet121':DenseNet121,
-             'PreActResNet18':PreActResNet18,
-             'DPN92':DPN92,
-             'DLA':DLA}
+# modle_dic = {'VGG16':VGG16, 
+#              'ResNet18':ResNet18,
+#              'ResNet50':ResNet50,
+#              'ResNet101':ResNet101,
+#              'RegNetX_200MF':RegNetX_200MF,
+#              'RegNetY_400MF':RegNetY_400MF,
+#              'MobileNetV2':MobileNetV2,
+#              'ResNeXt29(32x4d)':ResNeXt29_32x4d,
+#              'ResNeXt29(2x64d)':ResNeXt29_2x64d,
+#              'SimpleDLA':SimpleDLA,
+#              'DenseNet121':DenseNet121,
+#              'PreActResNet18':PreActResNet18,
+#              'DPN92':DPN92,
+#              'DLA':DLA}
 
 class warmup_lambda:
     def __init__(self, batchs:int, warmup_epochs:int=1,):
@@ -92,7 +92,7 @@ if __name__ == "__main__":
         v2.Normalize(mean=(0.4914, 0.4822, 0.4465), std=(0.2023, 0.1994, 0.2010)),
     ])
 
-    model = modle_dic[args.mode_name](num_classes=len(dataset_train.classes))
+    model = MobileNetV2(num_classes=len(dataset_train.classes))
     model.to(device)
     summary(model, (3, 32, 32))
 
