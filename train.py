@@ -15,7 +15,7 @@ from torchvision import datasets
 from torchvision.transforms import v2
 from torch.utils.tensorboard import SummaryWriter
 
-from models import *
+from models.mobilenetv2 import MobileNetV2
 
 # modle_dic = {'VGG16':VGG16, 
 #              'ResNet18':ResNet18,
