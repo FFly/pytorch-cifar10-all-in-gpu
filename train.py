@@ -15,22 +15,31 @@ from torchvision import datasets
 from torchvision.transforms import v2
 from torch.utils.tensorboard import SummaryWriter
 
+from models.vgg import VGG16
+from models.resnet import ResNet18, ResNet50, ResNet101
+from models.regnet import RegNetX_200MF, RegNetY_400MF
 from models.mobilenetv2 import MobileNetV2
+from models.resnext import ResNeXt29_32x4d, ResNeXt29_2x64d
+from models.dla_simple import SimpleDLA
+from models.densenet import DenseNet121
+from models.preact_resnet import PreActResNet18
+from models.dpn import DPN92
+from models.dla import DLA
 
-# modle_dic = {'VGG16':VGG16, 
-#              'ResNet18':ResNet18,
-#              'ResNet50':ResNet50,
-#              'ResNet101':ResNet101,
-#              'RegNetX_200MF':RegNetX_200MF,
-#              'RegNetY_400MF':RegNetY_400MF,
-#              'MobileNetV2':MobileNetV2,
-#              'ResNeXt29(32x4d)':ResNeXt29_32x4d,
-#              'ResNeXt29(2x64d)':ResNeXt29_2x64d,
-#              'SimpleDLA':SimpleDLA,
-#              'DenseNet121':DenseNet121,
-#              'PreActResNet18':PreActResNet18,
-#              'DPN92':DPN92,
-#              'DLA':DLA}
+modle_dic = {'VGG16':VGG16, 
+             'ResNet18':ResNet18,
+             'ResNet50':ResNet50,
+             'ResNet101':ResNet101,
+             'RegNetX_200MF':RegNetX_200MF,
+             'RegNetY_400MF':RegNetY_400MF,
+             'MobileNetV2':MobileNetV2,
+             'ResNeXt29(32x4d)':ResNeXt29_32x4d,
+             'ResNeXt29(2x64d)':ResNeXt29_2x64d,
+             'SimpleDLA':SimpleDLA,
+             'DenseNet121':DenseNet121,
+             'PreActResNet18':PreActResNet18,
+             'DPN92':DPN92,
+             'DLA':DLA}
 
 class warmup_lambda:
     def __init__(self, batchs:int, warmup_epochs:int=1,):
