@@ -57,7 +57,7 @@ def top_k_acc(predict, y, k=5):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='CIFAR10 Training')
-    parser.add_argument('--mode_name', type=str, default='MobileNetV2', help='Name of the model')
+    parser.add_argument('--mode_name', type=str, default='VGG16', help='Name of the model')
     parser.add_argument('--learn_rate', type=float, default=0.1, help='Learning rate for the optimizer')
     parser.add_argument('--train_epochs', type=int, default=200, help='Number of training epochs')
     parser.add_argument('--warmup_epochs', type=int, default=1, help='Number of warmup epochs')
@@ -101,7 +101,7 @@ if __name__ == "__main__":
         v2.Normalize(mean=(0.4914, 0.4822, 0.4465), std=(0.2023, 0.1994, 0.2010)),
     ])
 
-    model = MobileNetV2(num_classes=len(dataset_train.classes))
+    model = modle_dic[args.mode_name](num_classes=len(dataset_train.classes))
     model.to(device)
     summary(model, (3, 32, 32))
 
