@@ -15,7 +15,7 @@ from torchvision import datasets
 from torchvision.transforms import v2
 from torch.utils.tensorboard import SummaryWriter
 
-from models.vgg import VGG16
+from models.vgg import VGG11, VGG13, VGG16, VGG19
 from models.resnet import ResNet18, ResNet50, ResNet101
 from models.regnet import RegNetX_200MF, RegNetY_400MF
 from models.mobilenetv2 import MobileNetV2
@@ -26,7 +26,10 @@ from models.preact_resnet import PreActResNet18
 from models.dpn import DPN92
 from models.dla import DLA
 
-modle_dic = {'VGG16':VGG16, 
+modle_dic = {'VGG11':VGG11, 
+             'VGG13':VGG13, 
+             'VGG16':VGG16, 
+             'VGG19':VGG19,
              'ResNet18':ResNet18,
              'ResNet50':ResNet50,
              'ResNet101':ResNet101,
@@ -107,6 +110,7 @@ if __name__ == "__main__":
 
     if device == 'cuda':
         model = torch.nn.DataParallel(model)
+        torch.backends.cudnn.enabled = True
         torch.backends.cudnn.benchmark = True
 
     loss_fun = torch.nn.CrossEntropyLoss()
@@ -143,9 +147,12 @@ if __name__ == "__main__":
                     time.sleep(0.1)
                     warmup.step()
 
-                loss_list.append(loss.cpu().detach().numpy())
+                loss_list.append(loss.item())
                 y_list.append(y.cpu().detach().numpy())
                 p_list.append(p.cpu().detach().numpy())
+
+            del x,y,p,loss
+            torch.cuda.empty_cache()
             
             train_loss = np.array(loss_list).mean()
             p = np.concatenate(p_list)
@@ -154,18 +161,22 @@ if __name__ == "__main__":
             # val
             model.eval()
             loss_list, y_list, p_list = [], [], []
-            idx = torch.arange(len(y_val), device=device)
-            for i in tqdm(range(0, len(idx), args.batch_size), desc=f'Epoch {epoch}', unit=' Batch', ncols=0):
-                i = idx[i:i + args.batch_size]
-                x, y = x_val[i], y_val[i]
-                x = val_transform(x)
-                p = model(x)
+            with torch.no_grad():
+                idx = torch.arange(len(y_val), device=device)
+                for i in tqdm(range(0, len(idx), args.batch_size), desc=f'Epoch {epoch}', unit=' Batch', ncols=0):
+                    i = idx[i:i + args.batch_size]
+                    x, y = x_val[i], y_val[i]
+                    x = val_transform(x)
+                    p = model(x)
 
-                loss = loss_fun(p, y)
+                    loss = loss_fun(p, y)
 
-                loss_list.append(loss.cpu().detach().numpy())
-                y_list.append(y.cpu().detach().numpy())
-                p_list.append(p.cpu().detach().numpy())
+                    loss_list.append(loss.item())
+                    y_list.append(y.cpu().detach().numpy())
+                    p_list.append(p.cpu().detach().numpy())
+                    
+                del x,y,p,loss
+                torch.cuda.empty_cache()
             
             val_loss = np.array(loss_list).mean()
             p = np.concatenate(p_list)

@@ -2,13 +2,13 @@ import os
 
 if __name__ == "__main__":
     model_list = [
-        'VGG16', 
-        'ResNet18', 
-        'ResNet50', 
-        'ResNet101', 
-        'RegNetX_200MF', 
+        # 'VGG16', 
+        # 'ResNet18', 
+        # 'ResNet50', 
+        # 'ResNet101', 
+        # 'RegNetX_200MF', 
         'RegNetY_400MF', 
-        'MobileNetV2', 
+        # 'MobileNetV2', 
         'ResNeXt29(32x4d)', 
         'ResNeXt29(2x64d)', 
         'SimpleDLA', 

@@ -47,4 +47,4 @@ def VGG16(num_classes=10):
     return VGG('VGG16', num_classes=num_classes)
 
 def VGG19(num_classes=10):
-    return VGG('VGG16', num_classes=num_classes)
+    return VGG('VGG19', num_classes=num_classes)
