@@ -60,7 +60,7 @@ def top_k_acc(predict, y, k=5):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='CIFAR10 Training')
-    parser.add_argument('--mode_name', type=str, default='VGG16', help='Name of the model')
+    parser.add_argument('--mode_name', type=str, default='VGG11', help='Name of the model')
     parser.add_argument('--learn_rate', type=float, default=0.1, help='Learning rate for the optimizer')
     parser.add_argument('--train_epochs', type=int, default=200, help='Number of training epochs')
     parser.add_argument('--warmup_epochs', type=int, default=1, help='Number of warmup epochs')

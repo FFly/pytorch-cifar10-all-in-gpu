@@ -9,7 +9,7 @@ if __name__ == "__main__":
         # 'RegNetX_200MF', 
         'RegNetY_400MF', 
         # 'MobileNetV2', 
-        'ResNeXt29_32x4d', 
+        # 'ResNeXt29_32x4d', 
         'ResNeXt29_2x64d', 
         'SimpleDLA', 
         'DenseNet121', 
